@@ -6,6 +6,7 @@ const app = express();
 require("dotenv").config();
 
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use(multer().any());    //without it req.files = undefined , if file missing in req => req.files = []
 
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true })

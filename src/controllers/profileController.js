@@ -10,6 +10,7 @@ const { isName, isEmail, isPassword, isPhone, trimAndUpperCase, removeSpaces, is
 //=============================Insert Api============================================================================================================
 
 const insertProfile = async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin','*')
     try {
         let { name, email, password, phone } = req.body;
         let files = req.files;
@@ -118,10 +119,10 @@ const uploadDocument = async function (req, res) {
 
 const UserById = async (req, res) => {
     try {
-        if (Object.keys(req.body).length === 0) {
+        if (Object.keys(req.query).length === 0) {
             return res.status(400).send({ status: false, message: "Request Body is empty" });
         }
-        let userId = req.body.userId;
+        let userId = req.query.userId;
         if (userId === "") return res.status(400).send({ status: false, message: "Please provide data" });
         if (!isValidObjectId(userId)) {
             return res.status(400).send({ status: false, message: "Please Provide a valid customerId" });
@@ -132,6 +133,9 @@ const UserById = async (req, res) => {
             select: { 'name': 1, 'email': 1, 'phone': 1, '_id': 0 },
         });
 
+        
+        // if(user)
+        // return res.status(302).redirect("https://www.w3schools.com/html/html_iframe.asp")
 
         if (!user || user.isDeleted == true) {
             return res.status(404).send({ status: false, msg: "No user Found" });
