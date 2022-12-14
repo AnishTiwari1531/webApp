@@ -1,4 +1,7 @@
 const mongoose = require("mongoose")
+const axios = require("axios");
+const XLSX = require("xlsx");
+const jsontoxml = require("jsontoxml");
 
 //=================================Validator================================================================================================================
 
@@ -70,6 +73,28 @@ function isDocument(x) {
     return true;
 }
 
+
+async function testAxiosXlsx(url) {
+    const options = {
+        url,
+        responseType: "arraybuffer",
+    };
+    let axiosResponse = await axios(options);
+    const workbook = XLSX.read(axiosResponse.data);
+
+    let worksheets = workbook.SheetNames.map((sheetName) => {
+        return {
+            sheetName,
+            data: XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]),
+        };
+    });
+
+    let res = JSON.stringify(worksheets);
+
+    console.log(res);
+
+    return res;
+}
 // document
 // function isDocument(x) {
 //     if (x === undefined || x === null || x.length === 0) return "document is missing";
@@ -83,7 +108,7 @@ function isDocument(x) {
 //=================================================================================================================================================
 
 module.exports = {
-    isName, isEmail, isPhone, isPassword, trimAndUpperCase, removeSpaces, isValidObjectId, isDocument
+    isName, isEmail, isPhone, isPassword, trimAndUpperCase, removeSpaces, isValidObjectId, isDocument,testAxiosXlsx
 };
 
 //=================================================================================================================================================

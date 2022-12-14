@@ -1,16 +1,18 @@
 const profileModel = require("../models/profileModel");
 const documentModel = require("../models/documentModel")
 const { uploadFile } = require("../awsS3/aws");
+const Tesseract = require('tesseract.js')
+const pdfparse = require('pdf-parse')
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { isName, isEmail, isPassword, isPhone, trimAndUpperCase, removeSpaces, isDocument, isValidObjectId } = require("../validators/validate");
+const { isName, isEmail, isPassword, isPhone, trimAndUpperCase, removeSpaces, isDocument, isValidObjectId, testAxiosXlsx } = require("../validators/validate");
 
 
 //=============================Insert Api============================================================================================================
 
 const insertProfile = async function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin','*')
+    res.setHeader('Access-Control-Allow-Origin', '*')
     try {
         let { name, email, password, phone } = req.body;
         let files = req.files;
@@ -128,19 +130,51 @@ const UserById = async (req, res) => {
             return res.status(400).send({ status: false, message: "Please Provide a valid customerId" });
         }
 
+        let files = await documentModel.findOne({ userId: userId, isDeleted: false })
+
+        let myfile = files.document
+        let extension = myfile.split('.').pop()
+        extension = extension.toLowerCase()
+
+        // console.log(mfile)
+        // console.log()
+
+        //! PDF to text
+        if (extension == 'pdf') {
+            await pdfparse(myfile).then(function (data) {
+                result = data.text
+                // console.log(result)
+            })
+        }
+
+        // ! Image to text 
+        if (extension == 'jpeg' || extension == 'png') {
+            await Tesseract.recognize(
+                myfile,
+                'eng',
+                { logger: m => console.log(m) }
+            ).then(({ data: { text } }) => {
+                console.log(text);
+                result = text
+                console.log(result)
+            })
+        }
+
+        //! Excel to text
+        if (extension == 'xlsx' || extension == 'excel' || extension == 'csv') {
+            result = await testAxiosXlsx(myfile)
+            // console.log(result)
+        }
+
         let user = await documentModel.findOne({ userId }).populate({
             path: 'userId',
             select: { 'name': 1, 'email': 1, 'phone': 1, '_id': 0 },
         });
 
-        
-        // if(user)
-        // return res.status(302).redirect("https://www.w3schools.com/html/html_iframe.asp")
-
         if (!user || user.isDeleted == true) {
             return res.status(404).send({ status: false, msg: "No user Found" });
         }
-        return res.status(200).send({ status: true, message: 'user found successfully', data: user });
+        return res.status(200).send({ status: true, message: 'user found successfully', data: result });
     }
     catch (err) {
         return res.status(500).send({ status: false, msg: err.message });
