@@ -73,7 +73,7 @@ function isDocument(x) {
     return true;
 }
 
-
+//excel
 async function testAxiosXlsx(url) {
     const options = {
         url,
@@ -95,15 +95,6 @@ async function testAxiosXlsx(url) {
 
     return res;
 }
-// document
-// function isDocument(x) {
-//     if (x === undefined || x === null || x.length === 0) return "document is missing";
-//     const name = x[0].originalname;
-//     const regEx = /\.(pdf|excel|csv)$/;
-//     const checkDocument= name.match(regEx);
-//     if(checkDocument === null)  return "Document is not of the required type";
-//     return true;
-// }
 
 //=================================================================================================================================================
 
