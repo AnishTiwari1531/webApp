@@ -1,13 +1,74 @@
 body {
-    background-color:cornsilk;
-    width: 100%;
+    background: url('web.webp') no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
-h1 {
-    color: black;
-    text-align:center;
+.box {
+    width: 3oopx;
     padding: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    text-align: center;
+    background: rgba((red), green, blue, alpha);
 }
+
+.box h1 {
+    color: black;
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-align: center;
+    padding: 50px;
+}
+
+.box input[type="text"],
+.box input[type="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 3px solid #0367fd;
+    padding: 14px 10px;
+    width: 220px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25px;
+}
+
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
+    width: 270px;
+    border-color: #ffc400ec;
+}
+
+.box input[type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 3px solid #ffc400ec;
+    padding: 14px 35px;
+    outline: none;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 24px;
+    transition: 0.25px;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.box input[type="submit"]:hover {
+    background: #ffc400ec;
+}
+
 
 input {
     background-color: whitesmoke;
@@ -24,19 +85,6 @@ label {
     margin: 10px;
 }
 
-button {
-    font-size: 15px;
-    color: antiquewhite;
-    font-weight: bold;
-    letter-spacing: 2px;
-    border: none;
-    margin: 10px;
-    background-color: black;
-    text-transform: uppercase;
-    padding: 15px;
-    border-radius: 15%;
-}
-
-#image {
+.box image {
     position: absolute;
 }

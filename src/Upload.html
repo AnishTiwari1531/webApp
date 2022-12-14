@@ -5,23 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web App</title>
+    <title>Upload</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
+
+    <form class="box" action="http://localhost:3000/document" method="POST" enctype="multipart/form-data">
+
         <h1>Upload Document</h1>
-    </header>
-    <form action="http://localhost:3000/document" method="POST" enctype="multipart/form-data">
 
-        <label for="userId">userId:</label><br>
-        <input type="text" id="userId" name="userId"><br>
-    
-        <label for="document">document:</label><br>
-        <input type="file" id="document" name="document"><br>
+        <label for="userId">userId:</label>
+        <input type="text" id="userId" name="userId" placeholder="Please enter your UserId">
 
-        <button type="submit">submit</button>
+        <label for="document">document:</label>
+        <input type="file" id="document" name="document">
+
+        <input type="submit" value="Upload">
+
     </form>
 
 </html>

@@ -5,26 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web App</title>
+    <title>Register</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
+
+    <form class="box" action="http://localhost:3000/insert" method="POST" enctype="multipart/form-data">
+
         <h1>Insert User</h1>
-    </header>
-    <form action="http://localhost:3000/insert" method="POST" enctype="multipart/form-data">
-        <label for="name">name:</label><input type="text" id="name" name="name"><br>
 
-        <label for="email">email:</label><input type="text" id="email" name="email"><br>
+        <label for="name">name:</label>
+        <input type="text" id="name" name="name"placeholder="Please enter your name">
 
-        <label for="password">password:</label><input type="text" id="password" name="password"><br>
+        <label for="email">email:</label>
+        <input type="text" id="email" name="email"placeholder="Please enter your email">
 
-        <label for="phone">phone:</label><input type="text" id="phone" name="phone"><br>
+        <label for="password">password:</label>
+        <input type="text" id="password" name="password"placeholder="Please enter your password">
 
-        <label for="image">image:</label><input type="file" id="image"><br>
+        <label for="phone">phone:</label>
+        <input type="text" id="phone" name="phone"placeholder="Enter your phone number">
 
-        <button type="submit">submit</button>
+        <label for="image">image:</label>
+        <input type="file" id="image">
+
+        <input type="submit" value="Register">
+
     </form>
 
 </html>

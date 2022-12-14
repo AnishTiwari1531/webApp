@@ -3,10 +3,11 @@ const route = require("./routes/route.js");
 const mongoose = require("mongoose");
 const multer = require('multer');
 const cors = require("cors");
-
-const app = express();
-app.use(cors());
 require("dotenv").config();
+const app = express();
+
+
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(multer().any());    //without it req.files = undefined , if file missing in req => req.files = []
