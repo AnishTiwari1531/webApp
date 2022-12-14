@@ -1,8 +1,8 @@
 const profileModel = require("../models/profileModel");
 const documentModel = require("../models/documentModel")
 const { uploadFile } = require("../awsS3/aws");
-const Tesseract = require('tesseract.js')
-const pdfparse = require('pdf-parse')
+const Tesseract = require('tesseract.js');
+const pdfparse = require('pdf-parse');
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -208,6 +208,6 @@ const deleteUser = async (req, res) => {
 
 //=================================================================================================================================================
 
-module.exports = { insertProfile, login, uploadDocument, deleteUser, UserById };
+module.exports = { insertProfile, login, deleteUser, uploadDocument, UserById };
 
 //=================================================================================================================================================

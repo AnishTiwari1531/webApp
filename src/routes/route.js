@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authentication, authorisation } = require("../middlewares/auth");
-const { insertProfile, login, uploadDocument, deleteUser, UserById } = require("../controllers/profileController");
+const { insertProfile, login, deleteUser, uploadDocument, UserById } = require("../controllers/profileController");
 
 //=================================================================================================================================================
 
