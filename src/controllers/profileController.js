@@ -136,14 +136,10 @@ const UserById = async (req, res) => {
         let extension = myfile.split('.').pop()
         extension = extension.toLowerCase()
 
-        // console.log(mfile)
-        // console.log()
-
         //! PDF to text
         if (extension == 'pdf') {
             await pdfparse(myfile).then(function (data) {
                 result = data.text
-                // console.log(result)
             })
         }
 
@@ -163,7 +159,6 @@ const UserById = async (req, res) => {
         //! Excel to text
         if (extension == 'xlsx' || extension == 'excel' || extension == 'csv') {
             result = await testAxiosXlsx(myfile)
-            // console.log(result)
         }
 
         let user = await documentModel.findOne({ userId }).populate({

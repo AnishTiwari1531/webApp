@@ -7,9 +7,13 @@ const { insertProfile, login, deleteUser, uploadDocument, UserById } = require("
 
 router.post("/insert", insertProfile);
 router.post("/login", login);
-router.post("/document", uploadDocument);
-router.get("/get", UserById)
-router.post("/delete", deleteUser)
+router.post("/document", authentication, authorisation, uploadDocument);
+router.get("/get",authentication, authorisation, UserById)
+router.post("/delete",authentication, authorisation, deleteUser)
+
+router.post("/uploadDocument", uploadDocument);
+router.get("/getUSer", UserById)
+router.post("/deleteUser", deleteUser)
 // if api is invalid OR wrong URL
 router.all("/**", function (req, res) {
     res.status(404).send({
