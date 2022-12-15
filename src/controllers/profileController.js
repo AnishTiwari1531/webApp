@@ -62,6 +62,7 @@ const insertProfile = async function (req, res) {
 //=======================================Login Api==========================================================================================================
 
 const login = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     try {
         const body = req.body;
         let { email, password } = body;
@@ -99,10 +100,11 @@ const login = async (req, res) => {
 //=================================================================================================================================================
 
 const uploadDocument = async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     try {
         let userId = req.body.userId
         let files = req.files;
-        if (userId !== req.userId) return res.status(400).send({ status: false, message: "invalid user" })
+        if (userId === req.userId) return res.status(400).send({ status: false, message: "invalid user" })
 
         const error = {};
         if (isDocument(files) !== true) error.filesError = isDocument(files);
@@ -120,6 +122,7 @@ const uploadDocument = async function (req, res) {
 //=================================================================================================================================================
 
 const UserById = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     try {
         if (Object.keys(req.query).length === 0) {
             return res.status(400).send({ status: false, message: "Request Body is empty" });
@@ -179,6 +182,7 @@ const UserById = async (req, res) => {
 //=================================================================================================================================================
 
 const deleteUser = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     try {
         if (Object.keys(req.body).length === 0) {
             return res.status(400).send({ status: false, message: "Request Body is empty" });

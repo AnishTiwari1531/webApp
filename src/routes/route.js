@@ -8,8 +8,8 @@ const { insertProfile, login, deleteUser, uploadDocument, UserById } = require("
 router.post("/insert", insertProfile);
 router.post("/login", login);
 router.post("/document", authentication, authorisation, uploadDocument);
-router.get("/get",authentication, authorisation, UserById)
-router.post("/delete",authentication, authorisation, deleteUser)
+router.get("/get", authentication, authorisation, UserById)
+router.post("/delete", authentication, authorisation, deleteUser)
 
 router.post("/uploadDocument", uploadDocument);
 router.get("/getUSer", UserById)
