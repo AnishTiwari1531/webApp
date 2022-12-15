@@ -102,7 +102,7 @@ const uploadDocument = async function (req, res) {
     try {
         let userId = req.body.userId
         let files = req.files;
-        if (userId === req.userId) return res.status(400).send({ status: false, message: "invalid user" })
+        if (userId !== req.userId) return res.status(400).send({ status: false, message: "invalid user" })
 
         const error = {};
         if (isDocument(files) !== true) error.filesError = isDocument(files);
@@ -127,7 +127,7 @@ const UserById = async (req, res) => {
         let userId = req.query.userId;
         if (userId === "") return res.status(400).send({ status: false, message: "Please provide data" });
         if (!isValidObjectId(userId)) {
-            return res.status(400).send({ status: false, message: "Please Provide a valid customerId" });
+            return res.status(400).send({ status: false, message: "Please Provide a valid userId" });
         }
 
         let files = await documentModel.findOne({ userId: userId, isDeleted: false })
