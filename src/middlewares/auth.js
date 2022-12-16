@@ -35,7 +35,7 @@ const authentication = async function (req, res, next) {
 };
 
 //------------------------------------Authorisation----------------------------------------------------------------//
-const authorisation = async function (req, res, next) {     //userId from params
+const authorisation = async function (req, res, next) {    
     try {
         const userId = req.userId;
         if (!userId) return res.status(400).send({ status: false, message: "enter user id l" }); // handled by postman as well

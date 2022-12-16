@@ -5,15 +5,21 @@ const { insertProfile, login, deleteUser, uploadDocument, UserById } = require("
 
 //=================================================================================================================================================
 
+//for postman 
 router.post("/insert", insertProfile);
 router.post("/login", login);
 router.post("/document", authentication, authorisation, uploadDocument);
 router.get("/get", authentication, authorisation, UserById)
 router.post("/delete", authentication, authorisation, deleteUser)
 
+
+
+// for the frotnend server without jwt.
 router.post("/uploadDocument", uploadDocument);
 router.get("/getUSer", UserById)
 router.post("/deleteUser", deleteUser)
+
+
 // if api is invalid OR wrong URL
 router.all("/**", function (req, res) {
     res.status(404).send({

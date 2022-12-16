@@ -11,9 +11,9 @@ const isValidObjectId = function (objectId) {
 
 //validate fname & lname & uName
 function isName(x) {
-    if (!x) return "mandatory fname is missing";
-    if (typeof x !== "string") return "Data type Error : fname must be a string type";
-    if (x.length > 64) return "fname exceeded maximum charaters limit which is 64";
+    if (!x) return "mandatory name is missing";
+    if (typeof x !== "string") return "Data type Error : name must be a string type";
+    if (x.length > 64) return "name exceeded maximum charaters limit which is 64";
     const regEx = /^[a-zA-Z]+\s?[a-zA-Z]+\s?[a-zA-Z]{1,20}$/;
     if (!regEx.test(x)) return "invalid format of fname"
     return true;
@@ -60,7 +60,7 @@ function removeSpaces(x) {
 //trimAndUpperCase
 function trimAndUpperCase(x) {
     return x.split(" ").filter((y) => y).map((z) => z = z.charAt(0).toUpperCase() + z.slice(1)).join(" ");
-}
+}  
 
 
 //image
